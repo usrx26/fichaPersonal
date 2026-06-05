@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Personal - Panel Institucional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PANTALLA DE ACCESO RESTRINGIDO (LOGIN) -->
+    <div id="login-screen" class="login-overlay">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h2>Control de Acceso</h2>
+                <p>Ingrese sus credenciales corporativas o de invitado</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username"><i class="fa-solid fa-user"></i> Usuario</label>
+                    <input type="text" id="username" placeholder="admin o usuario" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="fa-solid fa-key"></i> Contraseña</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <div id="login-error" class="error-msg" style="display: none;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Credenciales incorrectas.
+                </div>
+                <button type="submit" class="btn-login">Autenticar Ingreso</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL DE LA APLICACIÓN -->
+    <div id="main-application" style="display: none;">
+        <header class="app-header">
+            <div class="header-container">
+                <div class="brand-identity">
+                    <div class="brand-badge"><i class="fa-solid fa-building-shield"></i></div>
+                    <div class="brand-text">
+                        <h1>SISTEMA DE CONTROL DE PERSONAL</h1>
+                        <p>Plataforma de Búsqueda Inteligente — Rol: <span id="user-role-badge">Invitado</span></p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div id="admin-tools" class="admin-exclusive-inline" style="display: none;">
+                        <button id="btn-manage-settings" class="btn btn-warning">
+                            <i class="fa-solid fa-gear"></i> Panel Maestro
+                        </button>
+                        
+                        <label for="excel-file" class="btn btn-secondary">
+                            <i class="fa-solid fa-file-excel"></i> Cargar Excel (.xlsx)
+                        </label>
+                        <input type="file" id="excel-file" accept=".xlsx, .xls, .csv" style="display: none;">
+                        
+                        <button id="btn-download-json" class="btn btn-primary" disabled>
+                            <i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos.json
+                        </button>
+                    </div>
+                    
+                    <button id="btn-logout" class="btn btn-danger">
+                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-content">
+            <!-- SECCIÓN INFORMATIVA PRINCIPAL -->
+            <section class="description-showcase">
+                <div class="description-header">
+                    <h3><i class="fa-solid fa-circle-nodes"></i> Lineamientos Informativos del Sistema</h3>
+                </div>
+                <div class="description-body">
+                    <p id="live-description-text">Cargando lineamientos informativos del sistema...</p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN DE SITIOS WEB RECOMENDADOS -->
+            <section class="recommended-links">
+                <div class="links-header">
+                    <h4><i class="fa-solid fa-layer-group"></i> Portales y Plataformas Recomendadas</h4>
+                </div>
+                <div class="links-grid">
+                    <a href="https://beneficios.caep.cl/" target="_blank" class="link-card-item">
+                        <div class="link-icon-box"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                        <div class="link-info">
+                            <span class="link-title">Beneficios CAEP</span>
+                            <span class="link-url">beneficios.caep.cl</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square link-arrow"></i>
+                    </a>
+                    
+                    <a href="http://direccionbienestar.carabineros.cl/convenios" target="_blank" class="link-card-item">
+                        <div class="link-icon-box"><i class="fa-solid fa-tags"></i></div>
+                        <div class="link-info">
+                            <span class="link-title">Convenios Bienestar</span>
+                            <span class="link-url">bienestar.carabineros.cl</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square link-arrow"></i>
+                    </a>
+
+                    <a href="http://georref.carabineros.cl/GeorReferenciador/index.aspx" target="_blank" class="link-card-item">
+                        <div class="link-icon-box"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <div class="link-info">
+                            <span class="link-title">GeoReferenciador</span>
+                            <span class="link-url">georref.carabineros.cl</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square link-arrow"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- PANEL DE FILTROS -->
+            <section class="control-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title"><i class="fa-solid fa-sliders"></i> Filtros de Búsqueda Avanzada</h2>
+                    <button id="btn-clear-all" class="btn-text"><i class="fa-solid fa-filter-circle-xmark"></i> Restablecer Filtros</button>
+                </div>
+                
+                <div class="filter-matrix">
+                    <div class="search-field-wrapper">
+                        <label><i class="fa-solid fa-user"></i> Apellidos y Nombres</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-magnifying-glass field-icon"></i>
+                            <input type="text" id="search-name" placeholder="Ej: Zúñiga Germán / Luis...">
+                        </div>
+                    </div>
+                    <div class="search-field-wrapper">
+                        <label><i class="fa-solid fa-medal"></i> Grado</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-award field-icon"></i>
+                            <input type="text" id="search-grado" placeholder="Ej: CARABINERO / SUBOF...">
+                        </div>
+                    </div>
+                    <div class="search-field-wrapper">
+                        <label><i class="fa-solid fa-layer-group"></i> Escalafón</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-id-card-clip field-icon"></i>
+                            <input type="text" id="search-escalafon" placeholder="Ej: O. Y S....">
+                        </div>
+                    </div>
+                    <div class="search-field-wrapper">
+                        <label><i class="fa-solid fa-barcode"></i> Código Funcionario</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-key field-icon"></i>
+                            <input type="text" id="search-codigo" placeholder="Ej: 957958H...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-footer">
+                    <div id="record-count" class="status-indicator">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> Inicializando base de datos...
+                    </div>
+                </div>
+            </section>
+
+            <section class="data-panel">
+                <div class="table-instruction"><i class="fa-solid fa-circle-info"></i> Haga clic sobre cualquier fila para desplegar la ficha de información completa del funcionario.</div>
+                <div id="gridjs-wrapper"></div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p><i class="fa-solid fa-building-columns"></i> Dirección de Tecnologías de la Información &copy; 2026. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- MODAL 1: FICHA DE DETALLES -->
+    <div id="details-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-address-card"></i> Ficha Integral del Funcionario</h3>
+                <button id="btn-close-modal" class="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: PANEL MAESTRO (ADMINISTRADOR) -->
+    <div id="admin-settings-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-card" style="max-width: 500px;">
+            <div class="modal-header" style="background-color: #d97706;">
+                <h3><i class="fa-solid fa-gears"></i> Panel Maestro de Configuración</h3>
+                <button id="btn-close-admin-modal" class="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label style="font-weight:700; color: var(--text-primary);"><i class="fa-solid fa-pen-to-square"></i> Descripción Principal de la Página</label>
+                    <textarea id="admin-input-description" rows="4" style="width:100%; font-family:inherit; padding:0.75rem; border:1px solid var(--border-subtle); border-radius:var(--radius-md); resize:none; font-size:0.9rem;" placeholder="Escriba la descripción institucional..."></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label style="font-weight:700; color: var(--text-primary);"><i class="fa-solid fa-user-lock"></i> Contraseña Temporal del Rol Invitado ('usuario')</label>
+                    <input type="text" id="admin-input-guest-pass" style="width:100%; padding:0.75rem; border:1px solid var(--border-subtle); border-radius:var(--radius-md);" placeholder="Nueva clave de invitado">
+                </div>
+                <button id="btn-save-admin-settings" class="btn-login" style="background-color: #d97706;">Guardar Cambios Maestros</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+:root {
+    --primary-deep: #0f172a;       /* Gris azulado oscuro para textos principales */
+    --navy-brand: #1e3a8a;         /* Azul institucional principal */
+    --accent-blue: #2563eb;        /* Azul brillante para elementos activos */
+    --surface-bg: #f8fafc;         /* Fondo claro ultra-limpio y descansado */
+    --card-surface: #ffffff;       /* Blanco puro para modularidad */
+    --text-primary: #0f172a;       /* Alta legibilidad sobre fondo claro */
+    --text-secondary: #475569;     /* Gris corporativo intermedio */
+    --border-subtle: #e2e8f0;      /* Líneas de división finas y suaves */
+    --row-hover: #f1f5f9;          /* Resaltado de filas en tabla */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.03);
+    --radius-lg: 12px;
+    --radius-md: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* DESCRIPCIÓN SHOWCASE (CLARO) */
+.description-showcase {
+    background-color: var(--card-surface);
+    border-left: 4px solid var(--navy-brand);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border-top: 1px solid var(--border-subtle);
+    border-right: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+}
+.description-header h3 {
+    font-size: 0.9rem;
+    color: var(--navy-brand);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+}
+.description-body p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ENLACES RECOMENDADOS (CLARO PREMIUM) */
+.recommended-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.links-header h4 {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+.link-card-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.1rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link-card-item:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background-color: #f8fafc;
+}
+.link-icon-box {
+    width: 42px;
+    height: 42px;
+    background-color: #f1f5f9;
+    color: var(--navy-brand);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-right: 0.85rem;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+.link-card-item:hover .link-icon-box {
+    background-color: #eff6ff;
+    color: var(--accent-blue);
+}
+.link-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.link-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.link-url {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 1px;
+}
+.link-arrow {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    transition: transform 0.2s, color 0.2s;
+}
+.link-card-item:hover .link-arrow {
+    transform: translate(2px, -2px);
+    color: var(--accent-blue);
+}
+
+/* PANTALLA DE ACCESO (LOGIN MODERNO) */
+.login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0f172a; background-image: radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%); display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 1rem; }
+.login-card { background-color: var(--card-surface); padding: 2.5rem; border-radius: var(--radius-lg); width: 100%; max-width: 420px; box-shadow: var(--shadow-lg); }
+.login-header { text-align: center; margin-bottom: 2rem; }
+.login-icon { background-color: #eff6ff; color: var(--accent-blue); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.85rem; margin: 0 auto 1rem; border: 1px solid #dbeafe; }
+.login-header h2 { font-size: 1.4rem; color: var(--text-primary); font-weight: 700; }
+.login-header p { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+.form-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-primary); }
+.form-group input { padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); font-size: 0.95rem; outline: none; transition: all 0.2s; background-color: #f8fafc; color: var(--text-primary); }
+.form-group input:focus { border-color: var(--accent-blue); background-color: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+.btn-login { width: 100%; padding: 0.8rem; background-color: var(--navy-brand); color: white; border: none; border-radius: var(--radius-md); font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s; }
+.btn-login:hover { background-color: var(--accent-blue); }
+.error-msg { background-color: #fef2f2; color: #dc2626; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid #fca5a5; font-size: 0.85rem; text-align: center; margin-bottom: 1rem; font-weight: 500; }
+
+/* CABECERA DE LA APP (HEADER CORPORATIVO) */
+.app-header { background-color: var(--navy-brand); color: white; padding: 1.25rem 2rem; border-bottom: 3px solid #172554; box-shadow: var(--shadow-md); }
+.header-container { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.brand-identity { display: flex; align-items: center; gap: 1.25rem; }
+.brand-badge { background-color: #ffffff; color: var(--navy-brand); width: 48px; height: 48px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: var(--shadow-sm); }
+.brand-text h1 { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.75px; }
+.brand-text p { font-size: 0.8rem; color: #93c5fd; margin-top: 2px; }
+#user-role-badge { font-weight: 700; color: #60a5fa; text-transform: uppercase; }
+
+.header-actions { display: flex; gap: 0.75rem; align-items: center; }
+.admin-exclusive-inline { display: flex; gap: 0.75rem; }
+.btn { padding: 0.65rem 1.25rem; border-radius: var(--radius-md); font-size: 0.875rem; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; border: none; }
+.btn-secondary { background-color: #1e293b; color: #f1f5f9; border: 1px solid #334155; }
+.btn-secondary:hover { background-color: #334155; }
+.btn-primary { background-color: #10b981; color: white; }
+.btn-primary:hover:not(:disabled) { background-color: #059669; }
+.btn-primary:disabled { background-color: #64748b; color: #cbd5e1; cursor: not-allowed; opacity: 0.5; }
+.btn-warning { background-color: #eab308; color: #0f172a; font-weight: 600; }
+.btn-warning:hover { background-color: #ca8a04; }
+.btn-danger { background-color: #ef4444; color: white; }
+.btn-danger:hover { background-color: #dc2626; }
+
+/* PANEL DE FILTROS Y CONTENIDO */
+.app-content { flex: 1; max-width: 1600px; width: 100%; margin: 0 auto; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.control-panel { background-color: var(--card-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-sm); }
+.panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem; margin-bottom: 1.25rem; }
+.panel-title { font-size: 1rem; font-weight: 600; color: var(--navy-brand); display: flex; align-items: center; gap: 0.5rem; }
+.btn-text { background: none; border: none; color: #ef4444; font-size: 0.875rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; }
+.btn-text:hover { text-decoration: underline; }
+.filter-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.search-field-wrapper { display: flex; flex-direction: column; gap: 0.5rem; }
+.search-field-wrapper label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 0.35rem; }
+.input-with-icon { position: relative; display: flex; align-items: center; }
+.field-icon { position: absolute; left: 1rem; color: #94a3b8; font-size: 0.9rem; pointer-events: none; }
+.input-with-icon input { width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; font-family: inherit; font-size: 0.9rem; color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); outline: none; background-color: #f8fafc; transition: all 0.15s ease; }
+.input-with-icon input:focus { background-color: #ffffff; border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+.panel-footer { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); }
+.status-indicator { display: inline-flex; align-items: center; gap: 0.5rem; background-color: #f1f5f9; color: #334155; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border-subtle); }
+
+/* CONTENEDOR DE LA TABLA CLARA */
+.data-panel { background-color: var(--card-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm); overflow: hidden; }
+.table-instruction { font-size: 0.85rem; color: var(--accent-blue); margin-bottom: 0.75rem; font-weight: 500; display: flex; align-items: center; gap: 0.4rem; }
+
+/* TRATAMIENTO DE GRID.JS EN MODO CLARO */
+.gridjs-container { font-family: inherit !important; color: var(--text-primary) !important; }
+.gridjs-wrapper { border: 1px solid var(--border-subtle) !important; border-radius: 8px !important; max-height: 55vh; background-color: #ffffff !important; }
+.gridjs-table { table-layout: auto !important; width: 100% !important; }
+.gridjs-tr { cursor: pointer; transition: background-color 0.15s; border-bottom: 1px solid var(--border-subtle) !important; }
+.gridjs-th { background-color: #f8fafc !important; color: var(--primary-deep) !important; font-weight: 600 !important; font-size: 0.75rem !important; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 5; border-bottom: 2px solid var(--border-subtle) !important; border-top: none !important; }
+.gridjs-tr:hover .gridjs-td { background-color: var(--row-hover) !important; }
+.gridjs-td { padding: 14px 16px !important; font-size: 0.88rem !important; color: var(--text-primary) !important; border: none !important; }
+.gridjs-pagination { padding: 10px !important; border-top: 1px solid var(--border-subtle) !important; color: var(--text-secondary) !important; }
+.gridjs-pages button { background-color: #ffffff !important; border: 1px solid var(--border-subtle) !important; color: var(--text-primary) !important; }
+.gridjs-pages button:hover:not([disabled]) { background-color: var(--row-hover) !important; }
+.gridjs-pages button[disabled] { opacity: 0.5; cursor: not-allowed; }
+.gridjs-pages button.gridjs-currentPage { background-color: var(--accent-blue) !important; color: white !important; border-color: var(--accent-blue) !important; }
+
+/* REGLAS DE ANCHO COLUMNAS */
+.gridjs-th[data-column-id="apellidos y nombres"], .gridjs-td:nth-child(2) { min-width: 320px !important; }
+.gridjs-th[data-column-id="codigo funcionario"], .gridjs-td:nth-child(3) { min-width: 150px !important; font-weight: 600; color: var(--navy-brand) !important; }
+.gridjs-th[data-column-id="grado"], .gridjs-td:nth-child(1) { min-width: 140px !important; }
+
+/* MODALES CLAROS */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 1rem; }
+.modal-card { background-color: var(--card-surface); width: 100%; max-width: 650px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid var(--border-subtle); animation: slideUp 0.25s ease-out; }
+.modal-header { background-color: #0f172a; color: white; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+.close-modal-btn { background: none; border: none; color: #94a3b8; font-size: 1.75rem; cursor: pointer; transition: color 0.2s; line-height: 1; }
+.close-modal-btn:hover { color: white; }
+.modal-body { padding: 1.5rem; background-color: #ffffff; }
+
+/* ESTRUCTURA INTERNA DE LA FICHA DE DETALLES */
+.info-profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.info-item { background-color: #f8fafc; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); }
+.info-item.full-width { grid-column: span 2; background-color: #fffbeb; border-color: #fde68a; }
+.info-item.highlight { background-color: #f0fdf4; border-color: #bbf7d0; }
+.info-label { font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem; }
+.info-value { font-size: 0.95rem; font-weight: 600; color: var(--primary-deep); }
+.info-item.highlight .info-value { color: #166534; }
+.info-item.full-width .info-value { color: #b45309; }
+
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.app-footer { background-color: #ffffff; color: #64748b; text-align: center; padding: 1.5rem; font-size: 0.8rem; border-top: 1px solid var(--border-subtle); margin-top: auto; }
